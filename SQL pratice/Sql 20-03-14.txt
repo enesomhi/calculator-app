@@ -1,0 +1,51 @@
+CREATE DATABASE lasu_db;
+USE lasu_db;
+CREATE TABLE faculties
+(
+faculty_id CHAR(5)PRIMARY KEY,
+faculty VARCHAR(25) NOT NULL,
+description VARCHAR(50) NOT NULL,
+entry_date DATE
+);
+CREATE TABLE departments
+(
+dept_id CHAR(5)PRIMARY KEY,
+dept VARCHAR(25)NOT NULL,
+dept_desc VARCHAR(50)NOT NULL,
+entry_date DATE NOT NULL,
+faculty_id CHAR(5)
+);
+CREATE TABLE students
+(
+student_id CHAR(5) PRIMARY KEY,
+first_name VARCHAR(25) NOT NULL,
+last_name VARCHAR(25) NOT NULL,
+gender VARCHAR(8) NOT NULL,
+mobile_no VARCHAR(11) NOT NULL,
+address VARCHAR(50) NOT NULL,
+dept_id CHAR(5),
+entry_date DATE 
+);
+INSERT INTO faculties VALUES('F01','Science','Medicine','2020-03-13');
+INSERT INTO faculties VALUES('F02','Science','SLT','2020-03-13');
+INSERT INTO departments VALUES('D01','science','school of medicine','2020-03-14','F01');
+INSERT INTO departments VALUES('D02','medicine','skin care ','2020-03-14','F02');
+INSERT INTO departments VALUES('D03','tech','computer science','2020-03-14','F01');
+INSERT INTO departments VALUES('D04','tech','agric science','2020-03-14','F02');
+INSERT INTO students VALUES('S01','timmy','john','male','090578546','dolphin ikoyi','D01','2020-03-14');
+INSERT INTO students VALUES('S02','funmi','lawal','female','09057965','eric moore ikoyi','D02','2020-03-14');
+DESCRIBE faculties;
+DESCRIBE departments;
+DESCRIBE students;
+SELECT * FROM faculties;
+SELECT * FROM departments;
+SELECT * FROM students;
+INSERT INTO students VALUES('S05','dayo','afolabi','male','08079389965','ajah lagos','D01','2020-03-14');
+INSERT INTO students VALUES('S06','emmanuel','frank','male','09075689965','festac town','D03','2020-03-14');
+INSERT INTO students VALUES('S07','joy','ajuzie','female','09045679965','navy town','D03','2020-03-14');
+SELECT * FROM students;
+INSERT INTO students VALUES('S08','bisi','jerry','female','09073929965','onikan TBS','D04','2020-03-14');
+SELECT departments.dept_id,faculty FROM departments JOIN faculties ON faculties.faculty_id=departments.faculty_id;
+SELECT dept, faculty FROM faculties JOIN departments ON faculties.faculty_id=faculties.faculty_id;
+SELECT student_id,first_name,last_name,gender,mobile_no,dept,faculty FROM students JOIN departments ON departments.dept_id
+=students.dept_id JOIN faculties ON faculties.faculty_id=departments.faculty_id;

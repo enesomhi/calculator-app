@@ -1,0 +1,45 @@
+create table faculties
+(
+faculty_id char(5)primary key,
+faculty varchar(25)not null,
+description varchar(100)not null,
+entry_date date
+);
+create table departments
+(
+dept_id char(5) primary key,
+dept varchar(25) not null,
+description varchar(100) not null,
+faculty_id char(5) references faculties(faculty_id),
+entery_date date
+);
+create table students
+(
+student_id char(5) primary key,
+first_name varchar(25)not null,
+last_name varchar(25)not null,
+gender char(8)not null,
+mobile_no varchar(11)not null,
+department_id char(5) references departments(dept_id),
+entry_date date
+);
+insert into faculties values('F01','Science','SLT','03-14-2020');
+insert into faculties values('F02','Science','medicine','03-14-2020');
+insert into departments values('D01','Science','Agric Science','F01','03-14-2020');
+insert into departments values('D02','Science','HCM','F01','03-14-2020');
+insert into departments values('D03','Science','SLT','F02','03-14-2020');
+insert into departments values('D04','Science','Agric Science','F02','03-14-2020');
+insert into students  values('S01','Maureen','Odus','Female','090567976','D01','03-14-2020');
+insert into students  values('S02','elizebath','iyos','Female','09085745976','D01','03-14-2020');
+insert into students  values('S03','Joy','Abu','Female','09052725797','D02','03-14-2020');
+insert into students  values('S04','Nife','James','Male','0907536976','D02','03-14-2020');
+insert into students  values('S05','Gladys','robert','Female','090635797','D03','03-14-2020');
+insert into students  values('S06','Mercy','Odi','Male','090569214','D04','03-14-2020');
+
+select * from students;
+select student_id,first_name,last_name,gender,dept from students 
+join departments on students.department_id = departments.dept_id
+join faculties on faculties.faculty_id=departments.faculty_id;
+
+
+

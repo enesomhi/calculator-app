@@ -1,0 +1,57 @@
+USE uni_db;
+SELECT * FROM students;
+UPDATE students SET last_name='pius'WHERE student_id ='S02';
+DELETE FROM students WHERE student_id ='S01';
+departments
+SELECT * FROM departments;
+SELECT * FROM facultties;
+SELECT departments.department_id,departments.faculty_id,facultties.description FROM departments
+JOIN facultties ON facultties.faculty_id=departments.faculty_id;
+CREATE DATABASE bank_db;
+USE bank_db;
+CREATE TABLE banks
+(
+bank_code CHAR(10) PRIMARY KEY,
+bank VARCHAR(25) NOT NULL,
+description VARCHAR(25) NOT NULL,
+entry_date DATE
+);
+SELECT * FROM banks;
+INSERT INTO banks VALUE('A01','acess bank','commercial bank','2020-03-13');
+INSERT INTO banks VALUES('A02','First bank','commercial bank','2020-03-13');
+INSERT INTO banks VALUES('A03','Main Street bank','micro finance bank','2020-03-13');
+SELECT * FROM banks;
+
+CREATE TABLE branches
+(
+branch_id CHAR(10) PRIMARY KEY,
+branch_code VARCHAR(25) NOT NULL,
+description VARCHAR(25) NOT NULL,
+bank_code CHAR(10) NOT NULL,INDEX(bank_code),FOREIGN KEY(bank_code)REFERENCES banks(bank_code)
+);
+SELECT * FROM branches;
+INSERT INTO branches VALUES('B01','V.I branch','off odekun street','A01');
+INSERT INTO branches VALUES('B02','Ikoyi branch','tinubo roundabout','A03');
+INSERT INTO branches VALUES('B03','Ikeja branch','allen junction','A02');
+
+CREATE TABLE customers
+(
+customer_id CHAR(10) PRIMARY KEY,
+first_name VARCHAR(25) NOT NULL,
+last_name VARCHAR (25) NOT NULL,
+gender CHAR(8) NOT NULL,
+mobile_no VARCHAR(11) NOT NULL,
+address VARCHAR(50),
+branch_id CHAR(10) NOT NULL,INDEX(branch_id),FOREIGN KEY(branch_id) REFERENCES branches(branch_id)
+);
+SELECT * FROM branches;
+SELECT * FROM customers;
+
+
+
+
+
+
+
+
+
